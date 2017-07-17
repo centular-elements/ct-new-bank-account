@@ -7,6 +7,7 @@
 <link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
+<link rel="import" href="../ct-bank-accounts-api/ct-bank-accounts-api.html">
 
 
 <!--
@@ -20,7 +21,7 @@ Element for capturing a new bank account
   <template>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-    <style is="custom-style" >
+    <style is="custom-style">
       :host {
 
         --paper-input-container:{
@@ -48,20 +49,14 @@ Element for capturing a new bank account
 
       paper-dropdown-menu.custom-dropdown {
         width: 100%;
-        --paper-input-container: {
-          border-top:1px solid #ccc;
-          border-left:1px solid #ccc;
-          border-right:1px solid #ccc;
-          border-bottom: none;
-          padding: 0;
-          margin-bottom: 8px;
-        };
         --paper-input-container-input: {
           padding-left: 10px;
         };
       }
 
     </style>
+
+    <ct-bank-accounts-api id="bankAccountsApi"></ct-bank-accounts-api>
 
     <div class="main-section">
       <div class="container-fluid">
@@ -212,6 +207,13 @@ Element for capturing a new bank account
 
       listeners: {
         'iron-form-presubmit':'_formHandler'
+      },
+
+      ready: function () {
+        this.$.bankAccountsApi.getBankAccountTypes()
+          .then(this._setPropertyResponseResults.bind(this, '_accountTypes'))
+          .catch(this.fire.bind(this, 'toast', {message: 'Failed to load owner bank accounts', type: 'danger'}))
+          .finally(this.set.bind(this, 'refreshing', false));
       },
 
       _submitForm : function() {
