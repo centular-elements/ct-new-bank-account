@@ -1,0 +1,232 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<link rel="import" href="../iron-form/iron-form.html">
+<link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-item/paper-item.html">
+
+
+<!--
+`ct-new-bank-account`
+Element for capturing a new bank account
+
+@demo demo/index.html
+-->
+
+<dom-module id="ct-new-bank-account">
+  <template>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <style is="custom-style" >
+      :host {
+
+        --paper-input-container:{
+          border-top: 1px solid #ccc;
+          border-left: 1px solid #ccc;
+          border-right: 1px solid #ccc;
+          border-bottom: none;
+          padding: 0 !important;
+          margin-bottom: 24px;
+        };
+
+        --paper-input-container-input: {
+
+          margin-left: 10px;
+        };
+
+        --paper-input-container-label: {
+          margin-left: 10px;
+        };
+      }
+
+      .main-section {
+        margin-top:20px;
+      }
+
+      paper-dropdown-menu.custom-dropdown {
+        width: 100%;
+        --paper-input-container: {
+          border-top:1px solid #ccc;
+          border-left:1px solid #ccc;
+          border-right:1px solid #ccc;
+          border-bottom: none;
+          padding: 0;
+          margin-bottom: 8px;
+        };
+        --paper-input-container-input: {
+          padding-left: 10px;
+        };
+      }
+
+    </style>
+
+    <div class="main-section">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12">
+            <h4>Add a new bank account</h4>
+          </div>
+        </div>
+      </div>
+      <form is="iron-form"
+            id="form"
+            method="post"
+            disable-native-validation-ui
+            novalidate>
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <paper-input
+                        class="ct-label ct-bordered"
+                        label="Account Holder First Name"
+                        type="text"
+                        name="accountHolderFirstName"
+                        value="[[ accountHolderFirstName ]]"
+                        required
+                        auto-validate
+                        error-message="Account holder first name required">
+                </paper-input>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <paper-input
+                        label="Account Holder Last Name"
+                        type="text"
+                        name="accountHolderSurname"
+                        value="[[ accountHolderLastName ]]"
+                        required
+                        auto-validate
+                        error-message="Account holder last name required">
+                </paper-input>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <paper-input
+                        label="Account Holder ID Number"
+                        type="text"
+                        name="accountHolderId"
+                        value="[[ accountHolderIdNumber ]]"
+                        required
+                        auto-validate
+                        error-message="Account holder id number required">
+                </paper-input>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <paper-dropdown-menu
+                        class="custom-dropdown"
+                        name="accountTypeId"
+                        label="Account Type"
+                        always-float-label
+                        noink
+                        no-animations
+                        required
+                        placeholder="Please select an account type">
+                  <paper-listbox class="dropdown-content" id="accountType" attr-for-selected="key">
+                    <template is="dom-repeat" items="[[ _accountTypes ]]">
+                      <paper-item key="[[item.id]]">[[item.name]]</paper-item>
+                    </template>
+                  </paper-listbox>
+                </paper-dropdown-menu>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <paper-input
+                        label="Bank"
+                        type="text"
+                        name="bank"
+                        value=""
+                        required
+                        auto-validate
+                        error-message="Bank required">
+                </paper-input>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <paper-input
+                        label="Branch Code"
+                        type="text"
+                        name="branchCode"
+                        value=""
+                        required
+                        auto-validate
+                        error-message="Branch code required">
+                </paper-input>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <paper-input
+                        label="Branch Name"
+                        type="text"
+                        name="branchName"
+                        value=""
+                        required
+                        auto-validate
+                        error-message="Branch name required">
+                </paper-input>
+              </div>
+            </div>
+            <div class="col-sm-6 col-xs-12">
+              <div class="form-group">
+                <paper-input
+                        label="Account Number"
+                        type="text"
+                        name="accountNumber"
+                        value=""
+                        required
+                        auto-validate
+                        error-message="Account number required">
+                </paper-input>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <paper-button class="element-background element-color btn btn-primary pull-right" on-tap="_submitForm" raised >Add Bank Account</paper-button>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </template>
+  <script>
+    Polymer({
+
+      is: 'ct-new-bank-account',
+
+      properties: {
+        accountHolderFirstName: String,
+        accountHolderLastName: String,
+        accountHolderIdNumber: String
+      },
+
+      listeners: {
+        'iron-form-presubmit':'_formHandler'
+      },
+
+      _submitForm : function() {
+        this.$.form.submit();
+      },
+
+      _formHandler : function(e) {
+        e.preventDefault();
+        var form = this.$.form;
+
+        if (form.validate()) {
+          var formData = form.serialize();
+          this.fire('ct-new-bank-account', formData);
+        }
+      },
+    });
+  </script>
+</dom-module>

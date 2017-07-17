@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>ct-new-bank-account test</title>
+
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ct-new-bank-account.html">
+  </head>
+  <body>
+    <test-fixture id="basic">
+      <template>
+        <ct-new-bank-account></ct-new-bank-account>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('ct-new-bank-account', function() {
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'ct-new-bank-account');
+        });
+      });
+    </script>
+  </body>
+</html>
