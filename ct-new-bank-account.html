@@ -8,7 +8,7 @@
 <link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../ct-bank-accounts-api/ct-bank-accounts-api.html">
-
+<link rel="import" href="../ct-core-utils/ct-api-consumer-behaviour.html">
 
 <!--
 `ct-new-bank-account`
@@ -196,8 +196,8 @@ Element for capturing a new bank account
   </template>
   <script>
     Polymer({
-
       is: 'ct-new-bank-account',
+      behaviors: [CT.Behaviours.ApiConsumer],
 
       properties: {
         accountHolderFirstName: String,
