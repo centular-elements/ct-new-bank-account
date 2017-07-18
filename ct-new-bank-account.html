@@ -211,7 +211,7 @@ Element for capturing a new bank account
 
       ready: function () {
         this.$.bankAccountsApi.getBankAccountTypes()
-          .then(this._setPropertyResponseResults.bind(this, '_accountTypes'))
+          .then(this._setPropertyResponse.bind(this, '_accountTypes'))
           .catch(this.fire.bind(this, 'toast', {message: 'Failed to load owner bank accounts', type: 'danger'}))
           .finally(this.set.bind(this, 'refreshing', false));
       },
