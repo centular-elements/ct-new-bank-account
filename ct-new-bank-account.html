@@ -117,6 +117,7 @@ Element for capturing a new bank account
               <div class="form-group">
                 <paper-dropdown-menu
                         class="custom-dropdown"
+                        id="accountTypeId"
                         name="accountTypeId"
                         label="Account Type"
                         always-float-label
@@ -226,6 +227,7 @@ Element for capturing a new bank account
 
         if (form.validate()) {
           var formData = form.serialize();
+          formData.accountTypeId = this.$.accountTypeId.selectedItem.key;
           this.fire('ct-new-bank-account', formData);
         }
       },
